@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "leaflet/dist/leaflet.css";
+
+@import "mapillary-js/dist/mapillary.css";
+
+.mapillary-zoom-container {
+  left: 14px;
+}
+
+.mapillary-bearing-indicator-container {
+  left: 10px;
+}
+
+.mapillary-attribution-container {
+  left: 0;
+  right: auto;
+}

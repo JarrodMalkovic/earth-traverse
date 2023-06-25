@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: ` <app-mapillary />`
 })
-export class AppComponent {
-  title = 'earth-traverse';
-}
+export class AppComponent {}
