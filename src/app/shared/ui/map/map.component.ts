@@ -15,7 +15,7 @@ import {
 } from '@angular/core'
 import { MapMarker, Position } from './map.types'
 
-import { isDefined } from '../utils/is-defined'
+import { isDefined } from '../../utils/is-defined'
 
 @Component({
   selector: 'app-map',

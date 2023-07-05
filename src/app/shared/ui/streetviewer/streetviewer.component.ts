@@ -41,7 +41,7 @@ export class StreetViewerComponent {
 
   private viewer: Mapillary.Viewer | undefined
 
-  ngAfterViewInit (): void {
+  ngAfterViewInit(): void {
     this.viewer = new Mapillary.Viewer({
       accessToken: 'MLY|6536312276433375|492ec533701fe6474a0c8fd94c4a929c',
       container: this.streetViewerContainer.nativeElement,
@@ -49,14 +49,14 @@ export class StreetViewerComponent {
     })
 
     // Allows the streetviewer to be navigatable immedietely once it has loaded
-    this.viewer?.deactivateCover()
+    this.viewer.deactivateCover()
 
     this.viewer.on('image', () => {
       this.resourceLoaded.emit()
     })
   }
 
-  ngOnChanges (changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if ('resourceId' in changes) {
       this.viewer?.moveTo(this.resourceId)
       this.resourceLoading.emit()

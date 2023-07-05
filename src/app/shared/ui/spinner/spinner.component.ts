@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
       <div role="status">
         <svg
           aria-hidden="true"
-          class="w-8 h-8 mr-2 animate-spin text-gray-600 fill-blue-600"
+          class="w-8 h-8 mr-2 animate-spin text-gray-600 fill-teal-600"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -27,4 +27,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SpinnerComponent {}
+export class SpinnerComponent { }
