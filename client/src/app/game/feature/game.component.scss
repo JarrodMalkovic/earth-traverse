@@ -1,0 +1,25 @@
+.test {
+  background-color: rgb(15, 23, 42);
+  background-attachment: fixed;
+  background-image: radial-gradient(
+      at 0% 8%,
+      rgba(108, 14, 216, 0.276) 0,
+      transparent 41%
+    ),
+    radial-gradient(at 100% 0%, rgba(115, 18, 130, 0.386) 0, transparent 62%),
+    radial-gradient(at 42% 1%, rgba(116, 136, 169, 0.422) 0, transparent 50%);
+  background-size: 300% 300%;
+  animation: gradientAnimation 20s linear infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 50% 0%, 100% 50%, 30% 70%;
+  }
+  50% {
+    background-position: 40% 100%, 0% 30%, 80% 50%;
+  }
+  100% {
+    background-position: 50% 0%, 100% 50%, 30% 70%;
+  }
+}
