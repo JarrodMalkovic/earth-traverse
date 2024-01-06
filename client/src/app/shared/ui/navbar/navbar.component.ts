@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/auth/data-access/auth.service';
               <a routerLink="/">
                 <img
                   class="block h-10 w-10 lg:hidden"
-                  src="/logo.png"
+                  src="/assets/logo.png"
                   alt="Your Company"
                 />
                 <img
