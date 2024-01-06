@@ -1,8 +1,10 @@
 package com.earthtraverse.myapp.dto.response;
 
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
 public class AnswerResponse {
     Double latitudeGuess;
     Double longitudeGuess;

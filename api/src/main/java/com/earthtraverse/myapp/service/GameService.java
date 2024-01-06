@@ -19,6 +19,7 @@ import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,12 +44,18 @@ public class GameService {
      */
     @Transactional()
     public Game createGame(Optional<User> user, Long mapId, int numberOfRounds) {
+        System.out.println("----------------------1");
         Game game = Game.builder()
+                .map(Map.builder().id(mapId).build())
                 .startTime(Instant.now())
                 .user(user.orElse(null))
+                .rounds(new ArrayList<>())
                 .build();
+        System.out.println("----------------------2");
+        System.out.println(game.getRounds());
         gameRepository.save(game);
-
+        System.out.println("----------------------3");
+        System.out.println(game.getRounds());
         List<Location> roundLocations = locationRepository.findRandomLocationsByMapId(mapId, numberOfRounds);
         roundLocations.subList(0, Math.min(numberOfRounds, roundLocations.size()))
                 .stream()
@@ -136,6 +143,7 @@ public class GameService {
     public List<GameDTO> getLatestGames(Long userId) {
         List<Game> games = gameRepository.findLastByUserIdOrderByEndTimeDesc(userId, PageRequest.of(0, 10));
 
+        System.out.println("Hello");
         return games.stream()
                 .map(game -> modelMapper.map(game, GameDTO.class))
                 .collect(Collectors.toList());

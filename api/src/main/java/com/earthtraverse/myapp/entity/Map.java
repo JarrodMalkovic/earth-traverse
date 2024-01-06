@@ -1,5 +1,6 @@
 package com.earthtraverse.myapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Map {
 
     private String image;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "map", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Location> locations;
 }

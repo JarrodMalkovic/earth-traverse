@@ -34,11 +34,11 @@ public class AuthController {
     }
 
     /**
-     * Login a user.
+     * Endpoint to login a user.
      *
-     * @param loginRequest Contains the username and password
-     * @param session      HTTP session
-     * @return The logged-in user
+     * @param loginRequest DTO containing the username and password
+     * @param session      Current HTTP session
+     * @return ResponseEntity containing the logged-in user
      */
     @PostMapping("/login")
     public ResponseEntity<User> loginUser(
@@ -52,10 +52,10 @@ public class AuthController {
     }
 
     /**
-     * Logout a user.
+     * Endpoint to logout a user.
      *
-     * @param session HTTP session
-     * @return An empty response
+     * @param session Current HTTP session
+     * @return ResponseEntity with no body
      */
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpSession session) {
@@ -65,10 +65,10 @@ public class AuthController {
     }
 
     /**
-     * Get the currently logged-in user.
+     * Endpoint to get the currently logged-in user.
      *
-     * @param session HTTP session
-     * @return The currently logged-in user
+     * @param session Current HTTP session
+     * @return ResponseEntity containing the currently logged-in user
      */
     @GetMapping("/self")
     public ResponseEntity<?> getSelf(HttpSession session) {

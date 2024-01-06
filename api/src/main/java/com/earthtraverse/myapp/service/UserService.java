@@ -53,6 +53,7 @@ public class UserService {
      * @return An Optional<User> that contains the retrieved user if one exists with the given ID
      */
     public Optional<User> findUserByIdOptional(Long userId) {
+        System.out.println("yooo3");
         return userRepository.findById(userId);
     }
 
@@ -81,7 +82,7 @@ public class UserService {
 
         CompletableFuture<Integer> totalGamesFuture = CompletableFuture.supplyAsync(() ->
                 gameService.getTotalGamesLast30Days(user.getId()));
-
+        System.out.println("YOO1");
         CompletableFuture<List<GameDTO>> latestGamesFuture = CompletableFuture.supplyAsync(() ->
                 gameService.getLatestGames(user.getId()));
 
@@ -89,7 +90,7 @@ public class UserService {
                 gameService.getAverageGameLengthLast30Days(user.getId()));
 
         CompletableFuture.allOf(averageDistanceFuture, totalGamesFuture, latestGamesFuture, averageGameLengthFuture).join();
-
+        System.out.println("YOO2");
         return UserStatsResponse.builder()
                 .userId(user.getId())
                 .averageDistanceLast30Days(averageDistanceFuture.join())

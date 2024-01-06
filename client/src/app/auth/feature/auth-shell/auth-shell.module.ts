@@ -3,9 +3,6 @@ import { NgModule } from '@angular/core';
 import { AuthShellRoutingModule } from './auth-shell-routing.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        AuthShellRoutingModule,
-    ],
+  imports: [CommonModule, AuthShellRoutingModule],
 })
-export class AuthShellModule { }
+export class AuthShellModule {}

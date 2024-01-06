@@ -1,5 +1,6 @@
 package com.earthtraverse.myapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,5 +26,6 @@ public class Location {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "map_id")
+    @JsonBackReference
     private Map map;
 }

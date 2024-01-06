@@ -1,4 +1,4 @@
-import * as Leaflet from 'leaflet'
+import * as Leaflet from 'leaflet';
 
 import {
   AfterViewInit,
@@ -11,158 +11,158 @@ import {
   OnDestroy,
   Output,
   SimpleChanges,
-  ViewChild
-} from '@angular/core'
-import { MapMarker, Position } from './map.types'
+  ViewChild,
+} from '@angular/core';
+import { MapMarker, Position } from './map.types';
 
-import { isDefined } from '../../utils/is-defined'
+import { isDefined } from '../../utils/is-defined';
 
 @Component({
   selector: 'app-map',
   template: ` <div class="h-full w-full" #mapContainer></div>`,
   styleUrls: ['./map.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * The initial zoom level of the map.
    */
   @Input()
-  zoom: number = 5
+  zoom: number = 1;
 
   /**
    * The initial latitude of the map center.
    */
   @Input()
-  latitude: number = 46.879966
+  latitude: number = 46.879966;
 
   /**
    * The initial longitude of the map center.
    */
   @Input()
-  longitude: number = -121.726909
+  longitude: number = -121.726909;
 
   /**
    * Determines whether the map automatically fits the bounds of the map markers.
    * When set to true, the map will adjust its view to display all the map markers within its bounds.
    */
   @Input()
-  autofitBounds: boolean = false
+  autofitBounds: boolean = false;
 
   /**
    * An array of map markers to be displayed on the map.
    */
   @Input()
-  mapMarkers?: MapMarker[]
+  mapMarkers?: MapMarker[];
 
   /**
    * Emits the position when the map is clicked.
    */
   @Output()
-  mapClicked = new EventEmitter<Position>()
+  mapClicked = new EventEmitter<Position>();
 
-  @ViewChild('mapContainer') mapContainer!: ElementRef<HTMLDivElement>
+  @ViewChild('mapContainer') mapContainer!: ElementRef<HTMLDivElement>;
 
-  private map: Leaflet.Map | undefined
-  private mapMarkersLayer: Leaflet.Layer | undefined
+  private map: Leaflet.Map | undefined;
+  private mapMarkersLayer: Leaflet.Layer | undefined;
   /**
    * URL pattern for OpenStreetMap tile layer
    * See: https://wiki.openstreetmap.org/wiki/Tile_servers
    */
-  private tileLayerURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+  private tileLayerURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-  ngAfterViewInit (): void {
+  ngAfterViewInit(): void {
     const center =
       this.latitude && this.longitude
         ? Leaflet.latLng(this.latitude, this.longitude)
-        : undefined
+        : undefined;
 
     this.map = new Leaflet.Map(this.mapContainer.nativeElement, {
       layers: [Leaflet.tileLayer(this.tileLayerURL)],
       zoom: this.zoom,
-      center
-    })
+      center,
+    });
 
-    this.map.on('click', clickEvent =>
+    this.map.on('click', (clickEvent) =>
       this.mapClicked.emit({
         latitude: clickEvent.latlng.lat,
-        longitude: clickEvent.latlng.lng
+        longitude: clickEvent.latlng.lng,
       })
-    )
+    );
 
     if (this.mapMarkersLayer) {
-      this.map.addLayer(this.mapMarkersLayer)
+      this.map.addLayer(this.mapMarkersLayer);
     }
 
     if (this.autofitBounds) {
-      this.fitBounds()
+      this.fitBounds();
     }
   }
 
-  ngOnChanges (changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if ('zoom' in changes) {
-      this.map?.setZoom(this.zoom)
+      this.map?.setZoom(this.zoom);
     }
 
     if ('latitude' in changes || 'longitude' in changes) {
-      this.map?.setView(Leaflet.latLng(this.latitude, this.longitude))
+      this.map?.setView(Leaflet.latLng(this.latitude, this.longitude));
     }
 
     if ('mapMarkers' in changes) {
       if (this.mapMarkersLayer) {
-        this.map?.removeLayer(this.mapMarkersLayer)
+        this.map?.removeLayer(this.mapMarkersLayer);
       }
 
       const leafletMarkers =
         this.mapMarkers?.map(
-          mapMarker =>
+          (mapMarker) =>
             new Leaflet.Marker(
               Leaflet.latLng(
                 mapMarker.position.latitude,
                 mapMarker.position.longitude
               ),
               {
-                icon: new Leaflet.Icon.Default({ shadowSize: [0, 0] })
+                icon: new Leaflet.Icon.Default({ shadowSize: [0, 0] }),
               }
             )
-        ) ?? []
+        ) ?? [];
 
       const leafletLines =
         this.mapMarkers
-          ?.filter(mapMarker => isDefined<MapMarker>(mapMarker.connectedTo))
+          ?.filter((mapMarker) => isDefined<MapMarker>(mapMarker.connectedTo))
           .map(
-            mapMarker =>
+            (mapMarker) =>
               new Leaflet.Polyline(
                 [
                   [mapMarker.position.latitude, mapMarker.position.longitude],
                   [
                     mapMarker.connectedTo?.position?.latitude ?? 0,
-                    mapMarker.connectedTo?.position?.longitude ?? 0
-                  ]
+                    mapMarker.connectedTo?.position?.longitude ?? 0,
+                  ],
                 ],
                 {
                   color: 'black',
-                  dashArray: '4, 5'
+                  dashArray: '4, 5',
                 }
               )
-          ) ?? []
+          ) ?? [];
 
       this.mapMarkersLayer = new Leaflet.LayerGroup([
         ...leafletMarkers,
-        ...leafletLines
-      ])
+        ...leafletLines,
+      ]);
 
-      this.map?.addLayer(this.mapMarkersLayer)
+      this.map?.addLayer(this.mapMarkersLayer);
 
       if (this.autofitBounds) {
-        this.fitBounds()
+        this.fitBounds();
       }
     }
   }
 
-  ngOnDestroy (): void {
+  ngOnDestroy(): void {
     if (this.map) {
-      this.map.remove()
+      this.map.remove();
     }
   }
 
@@ -171,8 +171,8 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
    * This method should be called when the size of the container changes (e.g., when the
    * container is resized dynamically) to rerender the map to fill the new container size.
    */
-  invalidateSize (): void {
-    this.map?.invalidateSize()
+  invalidateSize(): void {
+    this.map?.invalidateSize();
   }
 
   /**
@@ -180,18 +180,18 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
    * Calculates the bounds based on the latitude and longitude of each map marker
    * and updates the map view to display all the markers within the calculated bounds.
    */
-  fitBounds (): void {
+  fitBounds(): void {
     const markerLatLngs =
-      this.mapMarkers?.map(mapMarker =>
+      this.mapMarkers?.map((mapMarker) =>
         Leaflet.latLng(
           mapMarker.position.latitude,
           mapMarker.position.longitude
         )
-      ) ?? []
+      ) ?? [];
 
     if (markerLatLngs.length > 0) {
-      const bounds = Leaflet.latLngBounds(markerLatLngs)
-      this.map?.fitBounds(bounds)
+      const bounds = Leaflet.latLngBounds(markerLatLngs);
+      this.map?.fitBounds(bounds);
     }
   }
 }
