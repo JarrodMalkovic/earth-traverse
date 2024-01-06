@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins(
                 "http://localhost:4200",
-                "https://earth-traverse.vercel.app/"
+                "https://earth-traverse.vercel.app"
         ).allowCredentials(true);
     }
 }
