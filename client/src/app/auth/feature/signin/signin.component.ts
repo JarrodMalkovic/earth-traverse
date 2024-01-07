@@ -117,9 +117,10 @@ interface LoginForm {
             </div>
           </div>
           <div class="mt-6 grid grid-cols-2 gap-4">
-            <a
-              href="#"
+            <button
               class="flex w-full items-center justify-center gap-3 rounded-md bg-[#1D9BF0] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1D9BF0]"
+              title="OAuth login coming soon"
+              disabled
             >
               <svg
                 class="h-5 w-5"
@@ -132,11 +133,12 @@ interface LoginForm {
                 />
               </svg>
               <span class="text-sm font-semibold leading-6">Twitter</span>
-            </a>
+            </button>
 
-            <a
-              href="#"
+            <button
               class="flex w-full items-center justify-center gap-3 rounded-md bg-[#24292F] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]"
+              title="OAuth login coming soon"
+              disabled
             >
               <svg
                 class="h-5 w-5"
@@ -151,7 +153,7 @@ interface LoginForm {
                 />
               </svg>
               <span class="text-sm font-semibold leading-6">GitHub</span>
-            </a>
+            </button>
           </div>
         </form>
       </div>

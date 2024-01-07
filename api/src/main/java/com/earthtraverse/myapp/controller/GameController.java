@@ -4,6 +4,9 @@ import com.earthtraverse.myapp.dto.request.AnswerRequest;
 import com.earthtraverse.myapp.dto.request.CreateGameRequest;
 import com.earthtraverse.myapp.dto.response.AnswerResponse;
 import com.earthtraverse.myapp.dto.response.GameResponse;
+import com.earthtraverse.myapp.entity.Answer;
+import com.earthtraverse.myapp.entity.Game;
+import com.earthtraverse.myapp.entity.User;
 import com.earthtraverse.myapp.service.AuthService;
 import com.earthtraverse.myapp.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +34,10 @@ public class GameController {
      */
     @PostMapping
     public ResponseEntity<GameResponse> createGame(@RequestBody CreateGameRequest createGameRequest, HttpSession session) {
-        return authService.getCurrentUserOptional(session)
-                .map(user -> gameService.createGame(Optional.of(user), createGameRequest.getMapId(), createGameRequest.getNumberOfRounds()))
-                .map(game -> modelMapper.map(game, GameResponse.class))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.badRequest().build());
+        Optional<User> currentUser = authService.getCurrentUserOptional(session);
+        Game game = gameService.createGame(currentUser, createGameRequest.getMapId(), createGameRequest.getNumberOfRounds());
+        GameResponse gameResponse = modelMapper.map(game, GameResponse.class);
+        return ResponseEntity.ok(gameResponse);
     }
 
     /**
@@ -62,11 +64,10 @@ public class GameController {
      */
     @PostMapping("/{gameId}/answer")
     public ResponseEntity<AnswerResponse> submitAnswer(@PathVariable Long gameId, @RequestBody AnswerRequest answerRequest, HttpSession session) {
-        return authService.getCurrentUserOptional(session)
-                .map(user -> gameService.submitAnswer(Optional.of(user), gameId, answerRequest))
-                .map(answer -> modelMapper.map(answer, AnswerResponse.class))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.badRequest().build());
+        Optional<User> currentUser = authService.getCurrentUserOptional(session);
+        Answer answer = gameService.submitAnswer(currentUser, gameId, answerRequest);
+        AnswerResponse answerResponse = modelMapper.map(answer, AnswerResponse.class);
+        return ResponseEntity.ok(answerResponse);
     }
 }
 

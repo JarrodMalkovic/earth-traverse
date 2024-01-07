@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   HostListener,
-  Input,
   ViewChild,
 } from '@angular/core';
 import * as THREE from 'three';
@@ -26,13 +25,12 @@ export class ThreeSceneComponent {
   loader!: GLTFLoader;
   mixer!: THREE.AnimationMixer;
   clock = new THREE.Clock();
-  modelURL = '/assets/Kimono_Female.gltf'; // Your model path here
+  modelURL = '/assets/Kimono_Female.gltf';
 
   ngOnInit() {
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    //this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setClearColor(0x000000, 0); // the second param is the alpha (transparency)
+    this.renderer.setClearColor(0x000000, 0);
 
     this.loader = new GLTFLoader();
   }
