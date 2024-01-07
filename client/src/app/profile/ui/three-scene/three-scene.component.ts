@@ -11,7 +11,7 @@ import { OrbitControls, GLTFLoader } from 'three-stdlib';
 
 @Component({
   selector: 'app-three-scene',
-  template: ` <div class="mt-6 w-[325px] h-[450px]">
+  template: `<div class="mt-6 w-[325px] h-[450px]">
     <div class="w-full h-full" #rendererContainer></div>
   </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,

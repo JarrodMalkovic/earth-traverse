@@ -122,7 +122,7 @@ interface SignupForm {
               <input
                 id="passwordConfirm"
                 name="passwordConfirm"
-                type="passwordConfirm"
+                type="password"
                 autocomplete="passwordConfirm"
                 formControlName="passwordConfirm"
                 required

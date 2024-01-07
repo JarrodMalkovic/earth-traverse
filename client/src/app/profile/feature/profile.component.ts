@@ -12,9 +12,11 @@ import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
       <!-- User Profile -->
       <ng-container *ngIf="userProfile$ | async as response">
         <div *ngIf="response.status === 'loading'">
-          <div class="flex items-center border-b-2 border-white/10 pb-4">
+          <div
+            class="flex items-center border-b-2 border-white/10 pb-4  animate-pulse"
+          >
             <app-three-scene></app-three-scene>
-            <div class="ml-8 w-full animate-pulse">
+            <div class="ml-8 w-full">
               <div class="h-6 bg-gray-300 rounded w-1/4 mb-4"></div>
               <div class="h-12 bg-gray-300 rounded w-1/2 mb-4"></div>
               <div class="h-4 bg-gray-300 rounded w-1/3 mb-4"></div>
@@ -173,45 +175,58 @@ import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
           <div
             class="mt-8 backdrop-blur-lg bg-white/10 p-6 rounded-xl shadow-xl bg-opacity-10 flex-col space-y-2"
           >
-            <table class="w-full text-sm text-left text-gray-400 table-fixed">
-              <thead
-                class="text-xs uppercase text-gray-400 border-b  border-gray-600"
-              >
-                <tr>
-                  <th scope="col" class="py-3 w-2/12">Name</th>
-                  <th scope="col" class="py-3 w-8/12">Description</th>
-                  <th scope="col" class="text-right px-6 py-3 w-2/12">
-                    Timestamp
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  *ngFor="
-                    let item of response.result.latestGames;
-                    let last = last
-                  "
-                  [ngClass]="{
-                    'border-b border-b-1 border-gray-600': !last
-                  }"
+            <ng-container
+              *ngIf="
+                response.result.latestGames &&
+                  response.result.latestGames.length > 0;
+                else noGamesTemplate
+              "
+            >
+              <table class="w-full text-sm text-left text-gray-400 table-fixed">
+                <thead
+                  class="text-xs uppercase text-gray-400 border-b  border-gray-600"
                 >
-                  <td class="pr-3 py-4 text-white flex items-center">
-                    <img
-                      class="h-10 w-10 rounded-full mr-3 border-gray-600 border-2 group-hover:border-gray-300"
-                      src="{{ item.map.image }}"
-                      alt=""
-                    />
-                    {{ item.map.title }}
-                  </td>
-                  <td class="py-4 text-white">
-                    {{ item.map.description }}
-                  </td>
-                  <td class="text-right px-6 py-4 text-white">
-                    {{ item.startTime | date : 'short' }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  <tr>
+                    <th scope="col" class="py-3 w-2/12">Name</th>
+                    <th scope="col" class="py-3 w-8/12">Description</th>
+                    <th scope="col" class="text-right px-6 py-3 w-2/12">
+                      Timestamp
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of response.result.latestGames;
+                      let last = last
+                    "
+                    [ngClass]="{ 'border-b border-b-1 border-gray-600': !last }"
+                  >
+                    <td class="pr-3 py-4 text-white flex items-center">
+                      <img
+                        class="h-10 w-10 rounded-full mr-3 border-gray-600 border-2 group-hover:border-gray-300"
+                        src="{{ item.map.image }}"
+                        alt=""
+                      />
+                      {{ item.map.title }}
+                    </td>
+                    <td class="py-4 text-white">
+                      {{ item.map.description }}
+                    </td>
+                    <td class="text-right px-6 py-4 text-white">
+                      {{ item.startTime | date : 'short' }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+
+            <!-- Empty State Template -->
+            <ng-template #noGamesTemplate>
+              <div class="text-center text-white">
+                <p>No latest games available.</p>
+              </div>
+            </ng-template>
           </div>
         </div>
 
@@ -228,7 +243,7 @@ export class ProfileComponent implements OnInit {
 
   userProfile$!: Observable<ApiResponse<any>>;
   userStatistics$!: Observable<ApiResponse<any>>;
-  loadingRows = new Array(10).fill(0);
+  loadingRows = new Array(5).fill(0);
 
   constructor(
     private userService: UserService,
