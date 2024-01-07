@@ -37,7 +37,6 @@ export class GameService {
       roundNumber: number;
     }
   ) {
-    console.log('yo!!!!!');
     return this.http.post(`/games/${id}/answer`, submitAnswerRequest, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

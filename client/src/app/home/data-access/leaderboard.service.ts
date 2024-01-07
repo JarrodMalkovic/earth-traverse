@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, of, startWith } from 'rxjs';
+import { Observable, catchError, map, of, shareReplay, startWith } from 'rxjs';
 import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
 
 @Injectable({
@@ -21,7 +21,8 @@ export class LeaderboardService {
           error: error,
         })
       ),
-      startWith({ status: ApiStatus.LOADING })
+      startWith({ status: ApiStatus.LOADING }),
+      shareReplay(1)
     );
   }
 }

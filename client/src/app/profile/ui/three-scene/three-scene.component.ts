@@ -1,15 +1,20 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import * as THREE from 'three';
 import { OrbitControls, GLTFLoader } from 'three-stdlib';
 
 @Component({
   selector: 'app-three-scene',
-  template: `
-  <div class="mt-6 w-[325px] h-[450px]">
-
-  <div class="w-full h-full" #rendererContainer></div>
-</div>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  template: ` <div class="mt-6 w-[325px] h-[450px]">
+    <div class="w-full h-full" #rendererContainer></div>
+  </div>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThreeSceneComponent {
   @ViewChild('rendererContainer') rendererContainer!: ElementRef;
@@ -40,12 +45,11 @@ export class ThreeSceneComponent {
     // Set the renderer size to the container size
     this.renderer.setSize(width, height);
 
-
     // Cut off the top 100px
     const d = 1; // distance from camera to viewport
     const adjustedHeight = height - 200; // adjust the height by removing 100px from top
-    const verticalFov = 2 * Math.atan((adjustedHeight / 2) / d) * (180 / Math.PI); // calculate vertical FOV
-    console.log(verticalFov, height)
+    const verticalFov = 2 * Math.atan(adjustedHeight / 2 / d) * (180 / Math.PI); // calculate vertical FOV
+
     // Set up the camera with the correct aspect ratio
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1);
     this.camera.position.z = 1.5;
@@ -70,34 +74,29 @@ export class ThreeSceneComponent {
     this.rendererContainer.nativeElement.appendChild(this.renderer?.domElement);
     this.animate();
 
-    this.loader.load(this.modelURL, (gltf) => {
-      this.scene?.add(gltf.scene);
+    this.loader.load(
+      this.modelURL,
+      (gltf) => {
+        this.scene?.add(gltf.scene);
 
-      // Get animations from the loaded model
-      const animations = gltf.animations;
-      console.log(animations);
-      if (animations && animations.length) {
-        // Create an AnimationMixer instance
-        this.mixer = new THREE.AnimationMixer(gltf.scene);
-        const idleAnimation = THREE.AnimationClip.findByName(animations, 'Idle');
-        console.log(idleAnimation);
-        this.mixer.clipAction(idleAnimation).play();
+        // Get animations from the loaded model
+        const animations = gltf.animations;
+        if (animations && animations.length) {
+          // Create an AnimationMixer instance
+          this.mixer = new THREE.AnimationMixer(gltf.scene);
+          const idleAnimation = THREE.AnimationClip.findByName(
+            animations,
+            'Idle'
+          );
+          this.mixer.clipAction(idleAnimation).play();
+        }
+      },
+      undefined,
+      (error) => {
+        console.error(error);
       }
-
-      // // Create an ambient light which is uniform in all directions.
-      // const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
-      // this.scene.add(ambientLight);
-
-      // // Also add a point light for directional shadows
-      // const pointLight = new THREE.PointLight(0xffffff, 1); // white light
-      // pointLight.position.set(50, 50, 50); // position the light far away
-      // this.scene.add(pointLight);
-
-    }, undefined, (error) => {
-      console.error(error);
-    });
+    );
   }
-
 
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -114,7 +113,6 @@ export class ThreeSceneComponent {
   }
 
   animate() {
-
     // Before rendering, update the mixer
     if (this.mixer) {
       this.mixer.update(this.clock.getDelta());

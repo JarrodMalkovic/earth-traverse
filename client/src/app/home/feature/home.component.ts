@@ -34,9 +34,9 @@ import { ApiResponse } from 'src/app/shared/data-access/api.model';
                 />
               </svg>
             </div>
-            <div class="m-8 flex items-center flex-col space-y-6 w-full">
-              <div class="h-6 w-2/4 bg-gray-500 rounded"></div>
-              <div class="h-6 w-2/6 bg-gray-500 rounded"></div>
+            <div class="m-9 flex items-center flex-col space-y-6 w-full">
+              <div class="h-7 w-2/4 bg-gray-500 rounded"></div>
+              <div class="h-7 w-2/6 bg-gray-500 rounded"></div>
             </div>
           </div>
         </div>

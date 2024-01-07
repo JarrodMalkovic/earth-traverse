@@ -14,10 +14,10 @@ export class BaseUrlInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('yo');
     const apiReq = request.clone({
       url: `${environment.apiUrl}${request.url}`,
     });
+
     return next.handle(apiReq);
   }
 }

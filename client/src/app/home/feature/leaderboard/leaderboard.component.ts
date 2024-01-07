@@ -40,13 +40,13 @@ import { ApiStatus } from 'src/app/shared/data-access/api.model';
                   'border-b border-b-1 border-gray-600': !last
                 }"
               >
-                <td class="text-right rounded w-1/12 px-6 py-3">
+                <td class="text-right rounded-full w-1/12 px-6 py-4">
                   <div class="bg-gray-400 h-4"></div>
                 </td>
-                <td class="text-right rounded w-1/12 pr-6 py-3">
+                <td class="text-right rounded w-1/12 pr-6 py-4">
                   <div class="flex items-center">
                     <svg
-                      class="w-10 h-10 me-3 text-gray-400"
+                      class="w-10 h-10 mr-3 text-gray-400"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -59,16 +59,16 @@ import { ApiStatus } from 'src/app/shared/data-access/api.model';
                     <div class="bg-gray-400 h-4 w-full"></div>
                   </div>
                 </td>
-                <td class="text-right rounded w-1/12 px-6 py-3">
+                <td class="text-right rounded w-1/12 px-6 py-4">
                   <div class="bg-gray-400 h-4"></div>
                 </td>
-                <td class="text-right rounded w-1/12 px-6 py-3">
+                <td class="text-right rounded w-1/12 px-6 py-4">
                   <div class="bg-gray-400 h-4"></div>
                 </td>
-                <td class="text-right rounded w-1/12 px-6 py-3">
+                <td class="text-right rounded w-1/12 px-6 py-4">
                   <div class="bg-gray-400 h-4"></div>
                 </td>
-                <td class="text-right rounded w-1/12 px-6 py-3">
+                <td class="text-right rounded w-1/12 px-6 py-4">
                   <div class="bg-gray-400 h-4"></div>
                 </td>
               </tr>

@@ -203,7 +203,6 @@ export class GameComponent {
         const guessScore = Math.round(
           Math.max(0, (1 - response.distance / 25000) * 5000)
         );
-        console.log({ guessScore, distance: response.distance, game });
 
         this.currentGuessDistanceSubject.next(Math.round(response?.distance));
         this.currentGuessScoreSubject.next(guessScore);
@@ -211,7 +210,7 @@ export class GameComponent {
           (this.currentGuessScoreSubject.getValue() || 0) + guessScore
         );
         const actualLocation = game.rounds[roundNumber - 1].location;
-        console.log(actualLocation);
+
         this.mapMarkersSubject.next([
           {
             position: {
