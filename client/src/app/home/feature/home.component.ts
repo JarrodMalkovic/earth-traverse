@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
-import { ApiResponse, MapService } from '../data-access/map.service';
+import { MapService } from '../data-access/map.service';
 import { GameService } from 'src/app/game/data-access/game.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { ApiResponse } from 'src/app/shared/data-access/api.model';
 
 @Component({
   selector: 'app-home',

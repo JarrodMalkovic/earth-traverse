@@ -1,18 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of, startWith } from 'rxjs';
-
-export enum ApiStatus {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-export interface ApiResponse<T> {
-  status: ApiStatus;
-  result?: T;
-  error?: any;
-}
+import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
 
 @Injectable({
   providedIn: 'root',
