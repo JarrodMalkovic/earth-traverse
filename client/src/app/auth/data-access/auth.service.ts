@@ -16,14 +16,15 @@ export class AuthService {
     this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient, private cacheService: CacheService) {
-    try {
-      this.http
-        .get<any>('/auth/self', {
-          withCredentials: true,
-        })
-        .pipe(tap((user) => this.currentUserSubject.next(user)))
-        .subscribe();
-    } catch (error) {}
+    this.http
+      .get<any>('/auth/self', {
+        withCredentials: true,
+      })
+      .pipe(
+        tap((user) => this.currentUserSubject.next(user)),
+        catchError(() => of(null))
+      )
+      .subscribe();
   }
 
   login(credentials: { username: string; password: string }): Observable<any> {
