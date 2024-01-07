@@ -10,6 +10,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../data-access/auth.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { ApiStatus } from 'src/app/shared/data-access/api.model';
 
 interface SignupForm {
   username: FormControl<string>;
@@ -44,6 +46,15 @@ interface SignupForm {
           [formGroup]="signupForm"
           (ngSubmit)="onSubmit()"
         >
+          <div
+            *ngIf="signupError$ | async as loginError"
+            class="border-2 border-white/10 rounded"
+          >
+            <div class="text-red-400 text-center my-2">
+              {{ loginError }}
+            </div>
+          </div>
+
           <div>
             <label
               for="username"
@@ -221,6 +232,9 @@ interface SignupForm {
 export class SignupComponent {
   signupForm!: FormGroup<SignupForm>;
 
+  private signupErrorSubject = new Subject<string>();
+  signupError$ = this.signupErrorSubject.asObservable();
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -259,8 +273,12 @@ export class SignupComponent {
           username: this.signupForm.value.username as string,
           password: this.signupForm.value.password as string,
         })
-        .subscribe(() => {
-          this.router.navigate(['/']);
+        .subscribe((response) => {
+          if (response.status === ApiStatus.SUCCESS) {
+            this.router.navigate(['/']);
+          } else if (response.status === ApiStatus.ERROR) {
+            this.signupErrorSubject.next(response.error.message);
+          }
         });
     }
   }

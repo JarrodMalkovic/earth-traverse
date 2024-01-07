@@ -37,7 +37,7 @@ import { ApiStatus } from 'src/app/shared/data-access/api.model';
                 *ngFor="let loadingRow of loadingRows; let last = last"
                 class="animate-pulse"
                 [ngClass]="{
-                  'border-b border-b-1 border-gray-600': !last
+                  'border-b border-b-1 border-white/10': !last
                 }"
               >
                 <td class="text-right rounded-full w-1/12 px-6 py-4">
@@ -83,7 +83,7 @@ import { ApiStatus } from 'src/app/shared/data-access/api.model';
         >
           <table class="w-full text-sm text-left text-gray-400 table-fixed">
             <thead
-              class="text-xs uppercase text-gray-400 border-b  border-gray-600"
+              class="text-xs uppercase text-gray-400 border-b  border-white/10"
             >
               <tr>
                 <th scope="col" class="px-6 py-3 w-1/12">Rank</th>
@@ -106,7 +106,7 @@ import { ApiStatus } from 'src/app/shared/data-access/api.model';
                   let index = index
                 "
                 [ngClass]="{
-                  'border-b border-b-1 border-gray-600': !last
+                  'border-b border-b-1 border-white/10': !last
                 }"
               >
                 <td class="px-6 py-4 text-white">#{{ index + 1 }}</td>

@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../data-access/auth.service';
 import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
 
 interface LoginForm {
   username: FormControl<string>;
@@ -36,6 +38,15 @@ interface LoginForm {
         class="backdrop-blur-lg bg-white/10 p-12 rounded-xl shadow-xl bg-opacity-10"
       >
         <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div
+            *ngIf="loginError$ | async as loginError"
+            class="border-2 border-white/10 rounded"
+          >
+            <div class="text-red-400 text-center my-2">
+              {{ loginError }}
+            </div>
+          </div>
+
           <div>
             <label
               for="username"
@@ -169,6 +180,9 @@ interface LoginForm {
 export class SigninComponent {
   loginForm!: FormGroup<LoginForm>;
 
+  private loginErrorSubject = new Subject<string>();
+  loginError$ = this.loginErrorSubject.asObservable();
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -196,8 +210,12 @@ export class SigninComponent {
           username: this.loginForm.value.username as string,
           password: this.loginForm.value.password as string,
         })
-        .subscribe(() => {
-          this.router.navigate(['/']);
+        .subscribe((response) => {
+          if (response.status === ApiStatus.SUCCESS) {
+            this.router.navigate(['/']);
+          } else if (response.status === ApiStatus.ERROR) {
+            this.loginErrorSubject.next(response.error.message);
+          }
         });
     }
   }

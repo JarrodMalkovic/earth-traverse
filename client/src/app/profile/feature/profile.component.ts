@@ -90,7 +90,7 @@ import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
           >
             <table class="w-full text-sm text-left text-gray-400 table-fixed">
               <thead
-                class="text-xs uppercase text-gray-400 border-b  border-gray-600"
+                class="text-xs uppercase text-gray-400 border-b  border-white/10"
               >
                 <tr>
                   <th scope="col" class="py-3 w-2/12">Name</th>
@@ -105,7 +105,7 @@ import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
                   *ngFor="let loadingRow of loadingRows; let last = last"
                   class="animate-pulse"
                   [ngClass]="{
-                    'border-b border-b-1 border-gray-600': !last
+                    'border-b border-b-1 border-white/10': !last
                   }"
                 >
                   <td class="text-right rounded w-1/12 pr-6 py-4">
@@ -184,7 +184,7 @@ import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
             >
               <table class="w-full text-sm text-left text-gray-400 table-fixed">
                 <thead
-                  class="text-xs uppercase text-gray-400 border-b  border-gray-600"
+                  class="text-xs uppercase text-gray-400 border-b  border-white/10"
                 >
                   <tr>
                     <th scope="col" class="py-3 w-2/12">Name</th>
@@ -200,11 +200,11 @@ import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
                       let item of response.result.latestGames;
                       let last = last
                     "
-                    [ngClass]="{ 'border-b border-b-1 border-gray-600': !last }"
+                    [ngClass]="{ 'border-b border-b-1 border-white/10': !last }"
                   >
                     <td class="pr-3 py-4 text-white flex items-center">
                       <img
-                        class="h-10 w-10 rounded-full mr-3 border-gray-600 border-2 group-hover:border-gray-300"
+                        class="h-10 w-10 rounded-full mr-3 border-white/10 border-2 group-hover:border-gray-300"
                         src="{{ item.map.image }}"
                         alt=""
                       />
