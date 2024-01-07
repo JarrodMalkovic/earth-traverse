@@ -22,7 +22,6 @@ export class MapService {
 
   getMaps(): Observable<ApiResponse<any[]>> {
     return this.http.get<any>('/maps').pipe(
-      startWith({ status: ApiStatus.LOADING }),
       map((mapResponse) => ({
         status: ApiStatus.SUCCESS,
         result: mapResponse.content,
@@ -32,7 +31,8 @@ export class MapService {
           status: ApiStatus.ERROR,
           error: error,
         })
-      )
+      ),
+      startWith({ status: ApiStatus.LOADING })
     );
   }
 }
