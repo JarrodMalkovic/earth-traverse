@@ -27,7 +27,7 @@ interface SignupForm {
     <div class="mt-10">
       <img
         class="mx-auto h-12 w-12"
-        src="/assets/logo.png"
+        src="/assets/logo.webp"
         alt="Your Company"
       />
       <h1

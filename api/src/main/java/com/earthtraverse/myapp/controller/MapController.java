@@ -29,7 +29,7 @@ public class MapController {
     @GetMapping
     public Page<Map> getAllMaps(
             @RequestParam(defaultValue = "0") Integer pageNumber,
-            @RequestParam(defaultValue = "10") Integer pageSize
+            @RequestParam(defaultValue = "20") Integer pageSize
     ) {
         if (pageSize > MAXIMUM_PAGE_SIZE) {
             throw new ResponseStatusException(

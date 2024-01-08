@@ -11,7 +11,7 @@ import { ApiResponse } from 'src/app/shared/data-access/api.model';
     <app-navbar></app-navbar>
     <div
       *ngIf="games$ | async as response"
-      class="container mx-auto mt-8 max-w-7xl"
+      class="container mx-auto mt-8 mb-8 max-w-7xl"
     >
       <ng-container *ngIf="response.status === 'loading'">
         <div class="grid grid-cols-4 gap-8 mt-8">
@@ -52,7 +52,7 @@ import { ApiResponse } from 'src/app/shared/data-access/api.model';
               <a>
                 <img
                   class="h-full w-full object-cover rounded-t-xl hover:scale-110 transition duration-300"
-                  src="{{ game.image }}"
+                  src="/assets/{{ game.image }}"
                 />
               </a>
             </div>
