@@ -205,7 +205,7 @@ import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
                     <td class="pr-3 py-4 text-white flex items-center">
                       <img
                         class="h-10 w-10 rounded-full mr-3 border-white/10 border-2 group-hover:border-gray-300"
-                        src="{{ item.map.image }}"
+                        src="/assets/{{ item.map.image }}"
                         alt=""
                       />
                       {{ item.map.title }}
