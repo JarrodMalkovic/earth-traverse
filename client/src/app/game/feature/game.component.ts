@@ -17,6 +17,7 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
 @Component({
   selector: 'app-game',
   template: `
+    <!-- Games screen -->
     <ng-container *ngIf="isPlaying && !isOver">
       <div
         class="h-screen w-screen"
@@ -45,13 +46,16 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
       />
     </ng-container>
 
+    <!-- Score screen -->
     <ng-container *ngIf="!isPlaying && !isOver">
       <div class="flex flex-col h-screen w-screen">
-        <app-map
-          *ngIf="mapMarkers$ | async as mapMarkers"
-          [autofitBounds]="true"
-          [mapMarkers]="mapMarkers"
-        />
+        <div class="flex-grow min-h-0">
+          <app-map
+            *ngIf="mapMarkers$ | async as mapMarkers"
+            [autofitBounds]="true"
+            [mapMarkers]="mapMarkers"
+          />
+        </div>
         <div class="test flex justify-center items-center p-10">
           <div
             class="flex flex-col text-white background-blur-lg bg-white/10 w-full rounded-2xl max-w-7xl shadow-2xl z-[9999] h-fit p-10 space-y-4"
@@ -91,6 +95,7 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
       </div>
     </ng-container>
 
+    <!-- End screen -->
     <ng-container *ngIf="isOver">
       <div class="flex flex-col h-screen w-screen">
         <app-map

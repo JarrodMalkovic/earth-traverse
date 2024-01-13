@@ -122,7 +122,10 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
                 mapMarker.position.longitude
               ),
               {
-                icon: new Leaflet.Icon.Default({ shadowSize: [0, 0] }),
+                icon: new Leaflet.Icon.Default({
+                  iconUrl: '/assets/marker-icon.png',
+                  shadowSize: [0, 0],
+                }),
               }
             )
         ) ?? [];
