@@ -38,7 +38,7 @@ interface SignupForm {
       </h1>
     </div>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div class="mt-10 mx-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
       <div
         class="backdrop-blur-lg bg-white/10 p-12 rounded-xl shadow-xl bg-opacity-10 "
       >

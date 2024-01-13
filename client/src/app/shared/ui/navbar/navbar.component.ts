@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/auth/data-access/auth.service';
     <nav
       class="backdrop-blur-lg bg-white/10 shadow-2xl bg-opacity-90 border-b-2 border-white/10 z-50 relative"
     >
-      <div class="mx-auto container max-w-7xl">
+      <div class="mx-auto container max-w-7xl px-8">
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0">

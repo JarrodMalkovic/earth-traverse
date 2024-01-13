@@ -9,7 +9,7 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
   selector: 'app-profile',
   template: `
     <app-navbar></app-navbar>
-    <div class="container mx-auto mb-8 max-w-7xl">
+    <div class="container mx-auto mb-8 max-w-7xl px-8">
       <!-- User Profile -->
       <ng-container *ngIf="userProfile$ | async as response">
         <div *ngIf="response.status === 'loading'">
@@ -27,12 +27,16 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
 
         <div *ngIf="response.status === 'success'">
           <div class="flex items-center border-b-2 border-white/10 pb-4">
-            <app-three-scene></app-three-scene>
-            <div class="ml-8 w-full">
-              <h2 class="text-slate-400 text-lg font-bold font-sans italic">
+            <app-three-scene class="hidden md:block mr-8"></app-three-scene>
+            <div class="w-full">
+              <h2
+                class="text-slate-400 text-lg font-bold font-sans italic mt-8 md:mt-0"
+              >
                 Level 2 - 1000 XP
               </h2>
-              <h1 class="text-white text-6xl font-bold font-sans mb-4">
+              <h1
+                class="text-white text-6xl font-bold font-sans mb-4 overflow-ellipsis min-w-full"
+              >
                 {{ response.result.username }}
               </h1>
               <div class="w-2/3 mb-4">
@@ -51,7 +55,7 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
       <!-- User Statistics -->
       <ng-container *ngIf="userStatistics$ | async as response">
         <div *ngIf="response.status === 'loading'">
-          <div class="mt-8 grid grid-cols-3 gap-8">
+          <div class="mt-8 grid grid-cols-1 :grid-cols-3 gap-8">
             <div
               class="backdrop-blur-lg bg-white/10 p-6 rounded-xl shadow-xl bg-opacity-10 flex-col"
             >
@@ -138,7 +142,7 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
         </div>
 
         <div *ngIf="response.status === 'success'">
-          <div class="mt-8 grid grid-cols-3 gap-8">
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div
               class="backdrop-blur-lg bg-white/10 p-6 rounded-xl shadow-xl bg-opacity-10 flex-col space-y-2"
             >
@@ -183,43 +187,49 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
                 else noGamesTemplate
               "
             >
-              <table class="w-full text-sm text-left text-gray-400 table-fixed">
-                <thead
-                  class="text-xs uppercase text-gray-400 border-b  border-white/10"
+              <div class="overflow-x-auto">
+                <table
+                  class="w-full text-sm text-left text-gray-400 table-fixed min-w-[1100px]"
                 >
-                  <tr>
-                    <th scope="col" class="py-3 w-2/12">Name</th>
-                    <th scope="col" class="py-3 w-8/12">Description</th>
-                    <th scope="col" class="text-right px-6 py-3 w-2/12">
-                      Timestamp
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    *ngFor="
-                      let item of response.result.latestGames;
-                      let last = last
-                    "
-                    [ngClass]="{ 'border-b border-b-1 border-white/10': !last }"
+                  <thead
+                    class="text-xs uppercase text-gray-400 border-b  border-white/10"
                   >
-                    <td class="pr-3 py-4 text-white flex items-center">
-                      <img
-                        class="h-10 w-10 rounded-full mr-3 border-white/10 border-2 group-hover:border-gray-300"
-                        src="/assets/{{ item.map.image }}"
-                        alt=""
-                      />
-                      {{ item.map.title }}
-                    </td>
-                    <td class="py-4 text-white">
-                      {{ item.map.description }}
-                    </td>
-                    <td class="text-right px-6 py-4 text-white">
-                      {{ item.startTime | date : 'short' }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <tr>
+                      <th scope="col" class="py-3 w-2/12">Name</th>
+                      <th scope="col" class="py-3 w-8/12">Description</th>
+                      <th scope="col" class="text-right px-6 py-3 w-2/12">
+                        Timestamp
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="
+                        let item of response.result.latestGames;
+                        let last = last
+                      "
+                      [ngClass]="{
+                        'border-b border-b-1 border-white/10': !last
+                      }"
+                    >
+                      <td class="pr-3 py-4 text-white flex items-center">
+                        <img
+                          class="h-10 w-10 rounded-full mr-3 border-white/10 border-2 group-hover:border-gray-300"
+                          src="/assets/{{ item.map.image }}"
+                          alt=""
+                        />
+                        {{ item.map.title }}
+                      </td>
+                      <td class="py-4 text-white">
+                        {{ item.map.description }}
+                      </td>
+                      <td class="text-right px-6 py-4 text-white">
+                        {{ item.startTime | date : 'short' }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </ng-container>
 
             <!-- Empty State Template -->
