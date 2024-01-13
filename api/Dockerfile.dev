@@ -1,20 +1,22 @@
-# Use a Maven base image
-FROM maven:3.6.3-jdk-11-slim AS build
+# Use a Gradle base image compatible with Java 17
+FROM gradle:7.3.3-jdk17 AS build
 
 # Set the working directory
 WORKDIR /app
 
-# Copy source code to image
+# Copy the Gradle configuration files
+COPY build.gradle settings.gradle /app/
+
+# Copy the source code
 COPY src /app/src
-COPY pom.xml /app
 
-# Package the application
-RUN mvn -f /app/pom.xml clean package
+# Build the application
+RUN gradle build -x test --no-daemon
 
-# Use OpenJDK for running the application
-FROM openjdk:11-jre-slim
+# Use a JDK 17 image for running the application
+FROM openjdk:17-slim as runtime
 WORKDIR /app
-COPY --from=build /app/target/api-0.0.1-SNAPSHOT.jar /app/api.jar
+COPY --from=build /app/build/libs/*.jar /app/api.jar
 
 # Expose port
 EXPOSE 8080
