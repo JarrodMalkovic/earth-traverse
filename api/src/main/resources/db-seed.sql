@@ -1,8 +1,8 @@
-DELETE FROM location;
-DELETE FROM map;
+DELETE FROM answer;
 DELETE from round;
 DELETE from game;
-DELETE FROM answer;
+DELETE FROM location;
+DELETE FROM map;
 
 INSERT INTO map (title, description, image) VALUES
 ('China', 'Description for Map 2', 'china.webp');
