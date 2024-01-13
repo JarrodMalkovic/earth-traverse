@@ -7,29 +7,18 @@
 @import "mapillary-js/dist/mapillary.css";
 
 body {
-
-  // background-color: rgb(17, 24, 39);
-  // background-image: radial-gradient(at 0% 8%, rgb(22, 78, 99) 0, transparent 43%), radial-gradient(at 100% 0%, rgb(19, 78, 74) 0, transparent 72%);
-
-  // background-color: rgb(17, 24, 39);
-  // background-image: radial-gradient(at 0% 8%, rgb(112, 26, 117) 0, transparent 42%), radial-gradient(at 100% 0%, rgb(76, 29, 149) 0, transparent 68%);
-
-
-  // background-color: rgb(15, 23, 42);
-  // background-image: radial-gradient(at 0% 8%, rgb(19, 78, 74) 0, transparent 43%), radial-gradient(at 100% 0%, rgb(76, 29, 149) 0, transparent 68%);
-
-
-  // background-color: rgb(15, 23, 42);
-  // background-image: radial-gradient(at 0% 8%, rgb(13, 46, 44) 0, transparent 41%), radial-gradient(at 100% 0%, rgb(13, 23, 50) 0, transparent 62%), radial-gradient(at 42% 1%, rgb(30, 41, 59) 0, transparent 61%);
-
   height: 100vh;
   background-color: rgb(15, 23, 42);
   background-attachment: fixed;
-  background-image: radial-gradient(at 0% 8%, rgba(108, 14, 216, 0.276) 0, transparent 41%), 
-    radial-gradient(at 100% 0%, rgba(115, 18, 130, 0.386) 0, transparent 62%), 
+  background-image: radial-gradient(
+      at 0% 8%,
+      rgba(108, 14, 216, 0.276) 0,
+      transparent 41%
+    ),
+    radial-gradient(at 100% 0%, rgba(115, 18, 130, 0.386) 0, transparent 62%),
     radial-gradient(at 42% 1%, rgba(116, 136, 169, 0.422) 0, transparent 50%);
-  }
-  
+}
+
 .mapillary-zoom-container {
   @apply left-6;
 }
