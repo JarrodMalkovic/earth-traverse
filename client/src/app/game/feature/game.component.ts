@@ -254,6 +254,7 @@ export class GameComponent {
 
   goToNextRound(): void {
     this.isPlaying = true;
+    this.isResourceLoading = true;
   }
 
   onResourceLoading(): void {
