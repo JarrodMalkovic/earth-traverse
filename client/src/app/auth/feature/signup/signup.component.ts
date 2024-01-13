@@ -12,6 +12,7 @@ import { AuthService } from '../../data-access/auth.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ApiStatus } from 'src/app/shared/data-access/api.model';
+import { SeoService } from 'src/app/shared/utils/seo.service';
 
 interface SignupForm {
   username: FormControl<string>;
@@ -238,7 +239,8 @@ export class SignupComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private seoService: SeoService
   ) {}
 
   ngOnInit() {
@@ -259,6 +261,12 @@ export class SignupComponent {
       },
       { validators: this.matchPasswords }
     );
+
+    this.seoService.setPageTags({
+      title: 'Join EarthTraverse - Start Your Global Adventure Today!',
+      description:
+        'Ready to explore? Sign up for EarthTraverse and embark on a thrilling journey to discover hidden gems and iconic landmarks around the world. Become a part of our community of explorers!',
+    });
   }
 
   onSubmit() {

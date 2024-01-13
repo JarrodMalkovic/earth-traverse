@@ -4,6 +4,7 @@ import { MapService } from '../data-access/map.service';
 import { GameService } from 'src/app/game/data-access/game.service';
 import { Router } from '@angular/router';
 import { ApiResponse } from 'src/app/shared/data-access/api.model';
+import { SeoService } from 'src/app/shared/utils/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -85,11 +86,18 @@ export class HomeComponent implements OnInit {
   constructor(
     private mapService: MapService,
     private gameService: GameService,
-    private router: Router
+    private router: Router,
+    private seoService: SeoService
   ) {}
 
   ngOnInit(): void {
     this.games$ = this.mapService.getMaps();
+
+    this.seoService.setPageTags({
+      title: 'EarthTraverse - Explore and Play in a World of Maps!',
+      description:
+        'Discover the world with EarthTraverse! Browse our diverse collection of playable maps, each offering a unique journey across continents and cultures. Start your adventure now and learn about the world in a fun and engaging way.',
+    });
   }
 
   async handlePlayGame(mapId: number): Promise<void> {

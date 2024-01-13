@@ -11,8 +11,8 @@ import {
   firstValueFrom,
   map,
   switchMap,
-  tap,
 } from 'rxjs';
+import { SeoService } from 'src/app/shared/utils/seo.service';
 
 @Component({
   selector: 'app-game',
@@ -93,7 +93,6 @@ import {
 
     <ng-container *ngIf="isOver">
       <div class="flex flex-col h-screen w-screen">
-        meiyou {{ mapMarkers$ | async | json }}
         <app-map
           *ngIf="mapMarkers$ | async as mapMarkers"
           [autofitBounds]="true"
@@ -163,7 +162,8 @@ export class GameComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private gameService: GameService
+    private gameService: GameService,
+    private seoService: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -185,6 +185,12 @@ export class GameComponent {
           : null;
       })
     );
+
+    this.seoService.setPageTags({
+      title: 'EarthTraverse Adventure - Immerse in the Game Now!',
+      description:
+        "Experience the thrill of exploration with EarthTraverse's live game. Navigate through unknown territories, uncover hidden treasures, and test your geographic skills in real-time. Join the ongoing adventure and challenge yourself!",
+    });
   }
 
   async onGuessSubmitted(position: Position): Promise<void> {

@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/auth/data-access/auth.service';
   selector: 'app-navbar',
   template: `
     <nav
-      class="backdrop-blur-lg bg-white/10 shadow-2xl bg-opacity-90 border-b-2 border-white/10"
+      class="backdrop-blur-lg bg-white/10 shadow-2xl bg-opacity-90 border-b-2 border-white/10 z-50 relative"
     >
       <div class="mx-auto container max-w-7xl">
         <div class="flex h-16 items-center justify-between">
@@ -58,7 +58,7 @@ import { AuthService } from 'src/app/auth/data-access/auth.service';
                       id="user-menu-button"
                       aria-expanded="false"
                       aria-haspopup="true"
-                      (click)="toggleDropdown()"
+                      (click)="toggleDropdown($event)"
                     >
                       <span class="sr-only">Open user menu</span>
                       <img
@@ -71,10 +71,10 @@ import { AuthService } from 'src/app/auth/data-access/auth.service';
                 </div>
               </div>
               <app-dropdown
-                *ngIf="showDropdown"
+                [isOpen]="showDropdown"
                 (closeDropdown)="closeDropdown()"
               >
-                <div>
+                <div class="z-50">
                   <button
                     class="text-white w-full text-left p-2 text-sm font-bold hover:bg-white/20"
                     routerLink="/u/{{ currentUser.username }}"
@@ -82,7 +82,7 @@ import { AuthService } from 'src/app/auth/data-access/auth.service';
                     Profile
                   </button>
                   <button
-                    class="border-t-2 border-white/10 text-red-300 italic w-full text-left p-2 text-sm font-bold hover:bg-white/20"
+                    class="border-t-2 border-white/10 text-white italic w-full text-left p-2 text-sm font-bold hover:bg-white/20"
                     (click)="logout()"
                   >
                     Logout
@@ -124,7 +124,8 @@ export class NavbarComponent {
     this.currentUser$ = this.authService.currentUser$;
   }
 
-  toggleDropdown(): void {
+  toggleDropdown(event: MouseEvent): void {
+    event.stopPropagation();
     this.showDropdown = !this.showDropdown;
   }
 

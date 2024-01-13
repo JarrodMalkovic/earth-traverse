@@ -1,10 +1,18 @@
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
   template: `
     <div
-      class="z-50 absolute mt-2 w-48 backdrop-blur-lg bg-white/20 bg-opacity-10 rounded-md shadow-lg border-2 border-white/10"
+      *ngIf="isOpen"
+      class="z-50 absolute mt-2 w-48 bg-[#7488a96c] bg-opacity-50 backdrop-blur-lg rounded-md shadow-lg border-2 border-white/10"
     >
       <ng-content></ng-content>
     </div>
@@ -13,8 +21,21 @@ import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 export class DropdownComponent {
   @Output() closeDropdown = new EventEmitter<void>();
 
+  @Input() isOpen: boolean = false;
+
+  constructor(private elementRef: ElementRef) {}
+
   @HostListener('document:keydown.escape', ['$event'])
-  onKeydownHandler(event: KeyboardEvent) {
+  onKeydownHandler() {
     this.closeDropdown.emit();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      if (this.isOpen) {
+        this.closeDropdown.emit();
+      }
+    }
   }
 }

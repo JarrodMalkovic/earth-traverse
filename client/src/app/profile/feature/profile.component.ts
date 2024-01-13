@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../data-access/user.service';
 import { Observable } from 'rxjs';
 import { ApiResponse, ApiStatus } from 'src/app/shared/data-access/api.model';
+import { SeoService } from 'src/app/shared/utils/seo.service';
 
 @Component({
   selector: 'app-profile',
@@ -247,7 +248,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -256,5 +258,11 @@ export class ProfileComponent implements OnInit {
       this.userProfile$ = this.userService.getUserProfile(username);
       this.userStatistics$ = this.userService.getUserStatistics(username);
     }
+
+    this.seoService.setPageTags({
+      title: "Explorer's Profile - Discover EarthTraverse Users",
+      description:
+        'Dive into the journey of fellow explorers on EarthTraverse! Learn about their discoveries, favorite maps, and adventures. Connect and share experiences with a global community of like-minded individuals.',
+    });
   }
 }

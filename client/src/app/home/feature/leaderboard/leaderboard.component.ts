@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LeaderboardService } from '../../data-access/leaderboard.service';
 import { Observable } from 'rxjs';
 import { ApiStatus } from 'src/app/shared/data-access/api.model';
+import { SeoService } from 'src/app/shared/utils/seo.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -154,9 +155,18 @@ export class LeaderboardComponent implements OnInit {
   leaderboard$!: Observable<any>;
   loadingRows = new Array(20).fill(0);
 
-  constructor(private leaderboardService: LeaderboardService) {}
+  constructor(
+    private leaderboardService: LeaderboardService,
+    private seoService: SeoService
+  ) {}
 
   ngOnInit(): void {
     this.leaderboard$ = this.leaderboardService.getLeaderboard();
+
+    this.seoService.setPageTags({
+      title: "Global Leaderboard - EarthTraverse's Top Explorers",
+      description:
+        "See who's leading the way in EarthTraverse! Check out our global leaderboard to discover top explorers and their achievements. Compare your progress and get inspired to climb the ranks in your next adventure.",
+    });
   }
 }
