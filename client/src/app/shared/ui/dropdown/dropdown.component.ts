@@ -12,7 +12,7 @@ import {
   template: `
     <div
       *ngIf="isOpen"
-      class="z-50 absolute mt-2 w-48 bg-[#7488a96c] bg-opacity-50 backdrop-blur-lg rounded-md shadow-lg border-2 border-white/10"
+      class="z-50 absolute right-8 sm:right-0 w-48 bg-[#7488a96c] bg-opacity-50 backdrop-blur-lg rounded-md shadow-lg border-2 border-white/10"
     >
       <ng-content></ng-content>
     </div>

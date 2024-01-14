@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'app-scoreboard',
   template: `
     <div
-      class="bg-black fixed top-6 right-6 p-2 rounded-lg flex divide-x-2 divide-black divide-opacity-20 shadow-2xl bg-opacity-70"
+      class="bg-black fixed top-6 md:right-6 left-1/2 transform -translate-x-1/2 p-2 rounded-lg flex divide-x-2 divide-black divide-opacity-20 shadow-2xl bg-opacity-70 md:left-auto md:transform-none"
     >
       <div class="px-4 py-1 flex flex-col items-center">
         <h1 class="font-bold text-white text-md">Map</h1>

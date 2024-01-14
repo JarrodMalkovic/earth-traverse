@@ -71,11 +71,13 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
               />
             </div>
             <div class="flex justify-center">
-              Your guess was
-              <span class="font-bold mx-2">
-                {{ currentGuessDistance$ | async }}km
-              </span>
-              from the correct location
+              <div class="text-center">
+                Your guess was
+                <span class="font-bold">
+                  {{ currentGuessDistance$ | async }}km
+                </span>
+                from the correct location
+              </div>
             </div>
             <div class="flex justify-center">
               <div class="relative inline-block">

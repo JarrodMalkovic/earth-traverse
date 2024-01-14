@@ -20,11 +20,11 @@ body {
 }
 
 .mapillary-zoom-container {
-  @apply left-6;
+  @apply left-6 hidden md:block;
 }
 
 .mapillary-bearing-indicator-container {
-  @apply left-6 bottom-6;
+  @apply left-6 bottom-6  hidden md:block;
 }
 
 .mapillary-attribution-container {
@@ -32,5 +32,9 @@ body {
 }
 
 .mapillary-sequence-container {
-  @apply top-6;
+  @apply top-6 hidden md:block;
+}
+
+.mapillary-direction-perspective {
+  @apply hidden lg:block;
 }
