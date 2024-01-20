@@ -15,7 +15,9 @@ import { SeoService } from 'src/app/shared/utils/seo.service';
       class="container mx-auto mt-8 mb-8 px-8 max-w-7xl"
     >
       <ng-container *ngIf="response.status === 'loading'">
-        <div class="grid grid-cols-4 gap-8 mt-8">
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8"
+        >
           <div
             *ngFor="let card of loadingCards"
             class="backdrop-blur-lg bg-white/10 rounded-xl bg-opacity-90 flex flex-col justify-center items-center shadow-2xl animate-pulse"
