@@ -11,6 +11,7 @@
 ## 📝 Table of contents
 
 - [Run Locally](#-run-locally)
+- [Screenshots](#-screenshots)
 - [Technologies](#-technologies)
 - [License](#-license)
 
@@ -32,6 +33,15 @@ docker compose up --build
 ### Run in browser
 
 Open `https://localhost:4200` in your browser.
+
+
+## 📸 Screenshots
+
+![Browse Screen](./screenshots/browse-screen.png)
+![Guess Screen](./screenshots/guess-screen.png)
+![Profile Screen](./screenshots/profile-screen.png)
+![Signin Screen](./screenshots/signin-screen.png)
+![Streeview Screen](./screenshots/streetview-screen.png)
 
 ## 💻 Technologies
 
