@@ -6,6 +6,8 @@
   <a href="https://github.com/JarrodMalkovic/earth-traverse/issues">Request Feature</a> 
 </h3>
 
+![Gameplay](./screenshots/gameplay.mp4)
+
 ## 📝 Table of contents
 
 - [Run Locally](#-run-locally)
