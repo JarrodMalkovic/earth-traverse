@@ -6,7 +6,7 @@
   <a href="https://github.com/JarrodMalkovic/earth-traverse/issues">Request Feature</a> 
 </h3>
 
-![Gameplay](./screenshots/gameplay.gif)
+<img src="./screenshots/gameplay.gif" width="100%" >
 
 ## 📝 Table of contents
 
